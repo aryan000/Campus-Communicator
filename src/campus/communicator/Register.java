@@ -5,17 +5,38 @@
  */
 package campus.communicator;
 
+import com.mysql.jdbc.PreparedStatement;
+import java.awt.HeadlessException;
+import java.awt.Toolkit;
+import java.awt.event.WindowEvent;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author aryan_000
  */
 public class Register extends javax.swing.JFrame {
-
+Connection conn = null;
+   ResultSet rs = null;
+   PreparedStatement pst = null;
     /**
      * Creates new form Register
+     * @throws java.net.UnknownHostException
      */
-    public Register() {
+    public Register() throws UnknownHostException {
         initComponents();
+         
+        InetAddress IP=InetAddress.getLocalHost();
+         
+        jLabel6.setText(IP.toString());
     }
 
     /**
@@ -40,12 +61,17 @@ public class Register extends javax.swing.JFrame {
         jPasswordField2 = new javax.swing.JPasswordField();
         jLabel6 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Campus Communicator : Register");
 
         jLabel1.setText("Username : ");
 
         jTextField1.setText(" ");
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("Password : ");
 
@@ -58,6 +84,11 @@ public class Register extends javax.swing.JFrame {
         jTextField5.setText(" ");
 
         jButton1.setText("Register");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText(" Reset");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -143,8 +174,117 @@ public class Register extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        jTextField1.setText("");
+        jTextField5.setText("");
+        jPasswordField1.setText("");
+        jPasswordField2.setText("");
+        
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
+private boolean validate_username(String username) {
+   try{           
+       Class.forName("com.mysql.jdbc.Driver");  // MySQL database connection
+       String url = "jdbc:mysql://localhost:3306/"; 
+        String dbName = "javachat";
+        String driver = "com.mysql.jdbc.Driver"; 
+        String user = "root"; 
+        String pass = ""; 
+        try { 
+            Class.forName(driver).newInstance(); 
+              conn = DriverManager.getConnection(url+dbName,user,pass); 
+             // if(conn!=null)System.out.println("COnnected to database");
+           // conn.close(); 
+        }
+        catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException e) { 
+}  
+         pst = (PreparedStatement) conn.prepareStatement("Select username from chatdb where username=?");
+       pst.setString(1, username);  
+       System.out.println(pst);
+       rs = pst.executeQuery();                        
+       if(rs.next())            
+           return true;    
+       else
+           return false;            
+   }
+   catch(ClassNotFoundException | SQLException e){
+       return false;
+   }       
+}
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+
+        // TODO add your handling code here:
+        
+        String s1 = jTextField1.getText();
+        char[] p1 = jPasswordField1.getPassword();
+        char[] p2 = jPasswordField2.getPassword();
+        String s2 = String.copyValueOf(p2);
+        String s3 = String.copyValueOf(p1);
+        String s4 = jLabel6.getText();
+        String s5 = jTextField5.getText();
+        
+        
+        //System.err.println(s2 + " and " + s3);
+       if(!(s2.equals(s3)))
+       {   
+           JOptionPane.showMessageDialog(null,"Passwords do not match");
+           jPasswordField1.setText("");
+           jPasswordField2.setText("");
+       }
+       
+       else if(validate_username(s1.trim()))
+       {
+           JOptionPane.showMessageDialog(null,"Username already exist");
+           jTextField1.setText("");
+           
+       }
+       else 
+       {
+           try{           
+      // Class.forName("com.mysql.jdbc.Driver");  // MySQL database connection
+       String url = "jdbc:mysql://localhost:3306/"; 
+        String dbName = "javachat";
+        String driver = "com.mysql.jdbc.Driver"; 
+        String user = "root"; 
+        String pass = ""; 
+        try { 
+            Class.forName(driver).newInstance(); 
+              conn = DriverManager.getConnection(url+dbName,user,pass); 
+            // if(conn!=null)System.out.println("COnnected to database");
+           // conn.close(); 
+               
+              pst = (PreparedStatement) conn.prepareStatement("insert into chatdb(username,pass,ipaddr,email,onlinestatus) values(?,?,?,?,?)");
+              //pst.setInt(1,3);
+              pst.setString(1, s1.trim());
+              pst.setString(2, s2);
+              pst.setString(3, s4);
+              pst.setString(4,s5.trim());
+              pst.setInt(5, 0);
+              System.out.println(pst);
+               boolean check  = pst.execute();
+              
+              if(!check) 
+              {JOptionPane.showMessageDialog( null, "You have successfully created your user account");
+              
+              close();
+              Login nextframe = new Login();
+              nextframe.setVisible(true); 
+                  //System.out.println("I am reaching");
+              }
+              if(check) JOptionPane.showMessageDialog( null, "User cannot be added at this point of time ");
+              
+        }
+        catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException e) { 
+}       
+       }
+           catch(HeadlessException e) { }
+       }
+       
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -175,8 +315,13 @@ public class Register extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
-                new Register().setVisible(true);
+                try {
+                    new Register().setVisible(true);
+                } catch (UnknownHostException ex) {
+                    Logger.getLogger(Register.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
@@ -195,4 +340,12 @@ public class Register extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField5;
     // End of variables declaration//GEN-END:variables
+
+private void close()
+{
+WindowEvent winclosing = new WindowEvent(this,WindowEvent.WINDOW_CLOSING);
+Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(winclosing);
+}
+
+
 }
