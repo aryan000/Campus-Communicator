@@ -15,6 +15,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -27,6 +28,7 @@ public class Register extends javax.swing.JFrame {
 Connection conn = null;
    ResultSet rs = null;
    PreparedStatement pst = null;
+   Statement statement = null;
     /**
      * Creates new form Register
      * @throws java.net.UnknownHostException
@@ -210,6 +212,7 @@ private boolean validate_username(String username) {
        return false;
    }       
 }
+
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
         // TODO add your handling code here:
@@ -222,15 +225,24 @@ private boolean validate_username(String username) {
         String s4 = jLabel6.getText();
         String s5 = jTextField5.getText();
         
-        
+        if(s1.length()==0 || s2.length()==0||s3.length()==0 || s5.length()==0)
+        {
+            JOptionPane.showMessageDialog(null,"Field Cannot be blank");
+        }
         //System.err.println(s2 + " and " + s3);
-       if(!(s2.equals(s3)))
+        else  if(!(s2.equals(s3)))
        {   
            JOptionPane.showMessageDialog(null,"Passwords do not match");
            jPasswordField1.setText("");
            jPasswordField2.setText("");
        }
        
+        else  if(s2.length()<4)
+       {
+           JOptionPane.showMessageDialog(null, "Password should be greater than 4 characters");
+            jPasswordField1.setText("");
+           jPasswordField2.setText("");
+       }
        else if(validate_username(s1.trim()))
        {
            JOptionPane.showMessageDialog(null,"Username already exist");
@@ -251,7 +263,20 @@ private boolean validate_username(String username) {
               conn = DriverManager.getConnection(url+dbName,user,pass); 
             // if(conn!=null)System.out.println("COnnected to database");
            // conn.close(); 
-               
+                statement = conn.createStatement();
+              String sqlnew = "Create Database javachat";
+              statement.executeUpdate(sqlnew);
+              String tablenew = "create table chatdb\n" +
+                "( \n" +
+                "userid int primary key,\n" +
+                "username  varchar(255) NOT NULL,\n" +
+                "pass varchar(255) NOT NULL,\n" +
+                "ipaddr varchar(255) NOT NULL Unique,\n" +
+                "email varchar(255) NOT NULL\n" +
+                "\n" +
+                ");"; 
+               statement.execute(tablenew);
+              JOptionPane.showMessageDialog(null,"Database created");
               pst = (PreparedStatement) conn.prepareStatement("insert into chatdb(username,pass,ipaddr,email,onlinestatus) values(?,?,?,?,?)");
               //pst.setInt(1,3);
               pst.setString(1, s1.trim());
@@ -272,8 +297,44 @@ private boolean validate_username(String username) {
               }
               if(check) JOptionPane.showMessageDialog( null, "User cannot be added at this point of time ");
               
+        } 
+        catch (SQLException sqlException)
+        {
+            if(sqlException.getErrorCode()==1007)
+            {
+                try {
+                    pst = (PreparedStatement) conn.prepareStatement("insert into chatdb(username,pass,ipaddr,email,onlinestatus) values(?,?,?,?,?)");
+                    //pst.setInt(1,3);
+                    pst.setString(1, s1.trim());
+                    pst.setString(2, s2);
+                    pst.setString(3, s4);
+                    pst.setString(4, s5.trim());
+                    pst.setInt(5, 0);
+                    System.out.println(pst);
+                    boolean check = pst.execute();
+                    
+                    if (!check) {
+                        JOptionPane.showMessageDialog(null, "You have successfully created your user account");
+                        
+                        close();
+                        Login nextframe = new Login();
+                        nextframe.setVisible(true);
+                        //System.out.println("I am reaching");
+                    }
+                    if (check) {
+                        JOptionPane.showMessageDialog(null, "User cannot be added at this point of time ");
+                    }
+                } catch (SQLException sQLException) {
+                } catch (HeadlessException headlessException) {
+                }
+              
+            } 
+            
+            else {
+                JOptionPane.showMessageDialog(null,"Some Error Occured");
+            }
         }
-        catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException e) { 
+        catch (ClassNotFoundException | InstantiationException | IllegalAccessException   e) { 
 }       
        }
            catch(HeadlessException e) { }

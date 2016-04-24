@@ -1,0 +1,65 @@
+2015/11/17 17:58:23Server started...
+Got a connection. 
+Received: raj:has connected.:Connect
+raj
+has connected.
+Connect
+Sending: raj:has connected.:Chat
+Before raj added. 
+After raj added. 
+Sending: raj: :Connect
+Sending: Server: :Done
+Got a connection. 
+Received: mehul:has connected.:Connect
+mehul
+has connected.
+Connect
+Sending: mehul:has connected.:Chat
+Sending: mehul:has connected.:Chat
+Before mehul added. 
+After mehul added. 
+Sending: raj: :Connect
+Sending: raj: :Connect
+Sending: mehul: :Connect
+Sending: mehul: :Connect
+Sending: Server: :Done
+Sending: Server: :Done
+Received: mehul:Hello mehul , OOSE Ka kaam kar liya:Chat
+mehul
+Hello mehul , OOSE Ka kaam kar liya
+Chat
+Sending: mehul:Hello mehul , OOSE Ka kaam kar liya:Chat
+Sending: mehul:Hello mehul , OOSE Ka kaam kar liya:Chat
+Received: raj:nahi yaar. abhi bhaut kuch bacha hai:Chat
+raj
+nahi yaar. abhi bhaut kuch bacha hai
+Chat
+Sending: raj:nahi yaar. abhi bhaut kuch bacha hai:Chat
+Sending: raj:nahi yaar. abhi bhaut kuch bacha hai:Chat
+Received: mehul:kab karega . bhai jaldi kar le:Chat
+mehul
+kab karega . bhai jaldi kar le
+Chat
+Sending: mehul:kab karega . bhai jaldi kar le:Chat
+Sending: mehul:kab karega . bhai jaldi kar le:Chat
+Received: raj:okay yaar karta hoon:Chat
+raj
+okay yaar karta hoon
+Chat
+Sending: raj:okay yaar karta hoon:Chat
+Sending: raj:okay yaar karta hoon:Chat
+
+ Online users : 
+raj
+mehul
+Received: raj:hey:Chat
+raj
+hey
+Chat
+Sending: raj:hey:Chat
+Sending: raj:hey:Chat
+Sending: Server:is stopping and all users will be disconnected.
+:Chat
+Sending: Server:is stopping and all users will be disconnected.
+:Chat
+Server stopping... 

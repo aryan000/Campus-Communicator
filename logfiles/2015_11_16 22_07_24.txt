@@ -1,0 +1,51 @@
+2015/11/16 22:07:24Server started...
+Got a connection. 
+Received: anon577:has connected.:Connect
+anon577
+has connected.
+Connect
+Sending: anon577:has connected.:Chat
+Before anon577 added. 
+After anon577 added. 
+Sending: anon577: :Connect
+Sending: Server: :Done
+Got a connection. 
+Received: anon613:has connected.:Connect
+anon613
+has connected.
+Connect
+Sending: anon613:has connected.:Chat
+Sending: anon613:has connected.:Chat
+Before anon613 added. 
+After anon613 added. 
+Sending: anon577: :Connect
+Sending: anon577: :Connect
+Sending: anon613: :Connect
+Sending: anon613: :Connect
+Sending: Server: :Done
+Sending: Server: :Done
+Received: anon577:hello:Chat
+anon577
+hello
+Chat
+Sending: anon577:hello:Chat
+Sending: anon577:hello:Chat
+Received: anon613:wtf?:Chat
+anon613
+wtf?
+Chat
+Sending: anon613:wtf?:Chat
+Sending: anon613:wtf?:Chat
+Received: anon577: :Disconnect
+anon577
+ 
+Disconnect
+Sending: anon577:has disconnected.:Chat
+Sending: anon577:has disconnected.:Chat
+Sending: anon613: :Connect
+Sending: anon613: :Connect
+Sending: Server: :Done
+Sending: Server: :Done
+Lost a connection. 
+Lost a connection. 
+Server stopping... 

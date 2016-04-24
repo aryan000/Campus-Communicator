@@ -1,0 +1,69 @@
+2015/11/16 18:29:09Server started...
+Got a connection. 
+Received: anon569:has connected.:Connect
+anon569
+has connected.
+Connect
+Sending: anon569:has connected.:Chat
+Before anon569 added. 
+After anon569 added. 
+Sending: anon569: :Connect
+Sending: Server: :Done
+Got a connection. 
+Received: anon738:has connected.:Connect
+anon738
+has connected.
+Connect
+Sending: anon738:has connected.:Chat
+Sending: anon738:has connected.:Chat
+Before anon738 added. 
+After anon738 added. 
+Sending: anon569: :Connect
+Sending: anon569: :Connect
+Sending: anon738: :Connect
+Sending: anon738: :Connect
+Sending: Server: :Done
+Sending: Server: :Done
+Received: anon569:hello how are you:Chat
+anon569
+hello how are you
+Chat
+Sending: anon569:hello how are you:Chat
+Sending: anon569:hello how are you:Chat
+Received: anon738:i am fine thanks:Chat
+anon738
+i am fine thanks
+Chat
+Sending: anon738:i am fine thanks:Chat
+Sending: anon738:i am fine thanks:Chat
+Received: anon569:ok bie:Chat
+anon569
+ok bie
+Chat
+Sending: anon569:ok bie:Chat
+Sending: anon569:ok bie:Chat
+Received: anon738:mat jaa:Chat
+anon738
+mat jaa
+Chat
+Sending: anon738:mat jaa:Chat
+Sending: anon738:mat jaa:Chat
+Received: anon738: :Disconnect
+anon738
+ 
+Disconnect
+Sending: anon738:has disconnected.:Chat
+Sending: anon738:has disconnected.:Chat
+Sending: anon569: :Connect
+Sending: anon569: :Connect
+Sending: Server: :Done
+Sending: Server: :Done
+Lost a connection. 
+Received: anon569: :Disconnect
+anon569
+ 
+Disconnect
+Sending: anon569:has disconnected.:Chat
+Sending: Server: :Done
+Lost a connection. 
+Server stopping... 

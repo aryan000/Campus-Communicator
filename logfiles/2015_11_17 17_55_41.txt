@@ -1,0 +1,31 @@
+2015/11/17 17:55:41Server started...
+Got a connection. 
+Received: rahul:has connected.:Connect
+rahul
+has connected.
+Connect
+Sending: rahul:has connected.:Chat
+Before rahul added. 
+After rahul added. 
+Sending: rahul: :Connect
+Sending: Server: :Done
+Got a connection. 
+Received: Hero:has connected.:Connect
+Hero
+has connected.
+Connect
+Sending: Hero:has connected.:Chat
+Sending: Hero:has connected.:Chat
+Before Hero added. 
+After Hero added. 
+Sending: rahul: :Connect
+Sending: rahul: :Connect
+Sending: Hero: :Connect
+Sending: Hero: :Connect
+Sending: Server: :Done
+Sending: Server: :Done
+Sending: Server:is stopping and all users will be disconnected.
+:Chat
+Sending: Server:is stopping and all users will be disconnected.
+:Chat
+Server stopping... 
