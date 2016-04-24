@@ -9,11 +9,11 @@ import com.mysql.jdbc.PreparedStatement;
 import java.awt.HeadlessException;
 import java.awt.Toolkit;
 import java.awt.event.WindowEvent;
+import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -135,9 +135,9 @@ public class Login extends javax.swing.JFrame {
       
            // conn.close(); 
        try{ 
-            DriverManager.registerDriver(new com.mysql.jdbc.Driver());
-              conn = DriverManager.getConnection(url+dbName,user,pass); 
-              if(conn!=null)System.out.println("COnnected to database");
+           // DriverManager.registerDriver(new com.mysql.jdbc.Driver());
+             // conn = DriverManager.getConnection(url+dbName,user,pass); 
+              //if(conn!=null)System.out.println("COnnected to database");
               
              char[] pswd = jPasswordField1.getPassword();
              String pwd =  String.copyValueOf(pswd);
@@ -147,11 +147,11 @@ public class Login extends javax.swing.JFrame {
              // String sql = "select userid from chatdb where username='"+u+"' and pass='"+pwd+"'";
              String sql = "select * from chatdb where username=? and pass=?";
               
-             pst =   (PreparedStatement) conn.prepareStatement(sql);
-            pst.setString(1,trim);
-            pst.setString(2,pwd);
+            // pst =   (PreparedStatement) conn.prepareStatement(sql);
+            //pst.setString(1,trim);
+            //pst.setString(2,pwd);
           // System.out.println(pst);
-             rs= pst.executeQuery();
+             //rs= pst.executeQuery();
            /*  while(rs.next())
              {
                  System.out.println(rs);
@@ -159,9 +159,16 @@ public class Login extends javax.swing.JFrame {
              
             // System.out.println(rs.next());
              String ip= ""; //int status = 1;
-               if(rs.next())
+               if(u.length()!=0)
                { 
-                   ip = rs.getString("ipaddr");
+                    
+                   try {
+            InetAddress ipAddr = InetAddress.getLocalHost();
+            ip  = ipAddr.getHostAddress();
+            System.out.println(ipAddr.getHostAddress());
+        } catch (UnknownHostException ex) {
+        }
+
 	JOptionPane.showMessageDialog(null,"You are now being logged in");
         jTextField1.setText("");
         jPasswordField1.setText("");
@@ -181,7 +188,7 @@ public class Login extends javax.swing.JFrame {
                }
                
          }
-         catch(SQLException | HeadlessException e) { 
+         catch(HeadlessException e) { 
             //  JOptionPane.showMessageDialog(null,"Invalid Credentials");
              System.out.println(e);
              JOptionPane.showMessageDialog(null,e);
@@ -198,15 +205,15 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-       try {
-           close();
-           Register nextframe = new Register();         
-           nextframe.setVisible(true);
-// TODO add your handling code here:
-       } catch (UnknownHostException ex) {
-           Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-       }
-        
+        try {
+            close();
+            Register nextframe = new Register();
+            nextframe.setVisible(true);
+            // TODO add your handling code here:
+        } catch (UnknownHostException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**

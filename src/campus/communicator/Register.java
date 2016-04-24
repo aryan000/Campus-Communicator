@@ -259,11 +259,12 @@ private boolean validate_username(String username) {
         String user = "root"; 
         String pass = ""; 
         try { 
-            Class.forName(driver).newInstance(); 
+            /* Class.forName(driver).newInstance(); 
               conn = DriverManager.getConnection(url+dbName,user,pass); 
             // if(conn!=null)System.out.println("COnnected to database");
            // conn.close(); 
                 statement = conn.createStatement();
+            */
               String sqlnew = "Create Database javachat";
               statement.executeUpdate(sqlnew);
               String tablenew = "create table chatdb\n" +
@@ -275,19 +276,20 @@ private boolean validate_username(String username) {
                 "email varchar(255) NOT NULL\n" +
                 "\n" +
                 ");"; 
-               statement.execute(tablenew);
+             //  statement.execute(tablenew);
               JOptionPane.showMessageDialog(null,"Database created");
-              pst = (PreparedStatement) conn.prepareStatement("insert into chatdb(username,pass,ipaddr,email,onlinestatus) values(?,?,?,?,?)");
+             // pst = (PreparedStatement) conn.prepareStatement("insert into chatdb(username,pass,ipaddr,email,onlinestatus) values(?,?,?,?,?)");
               //pst.setInt(1,3);
-              pst.setString(1, s1.trim());
+             /* pst.setString(1, s1.trim());
               pst.setString(2, s2);
               pst.setString(3, s4);
               pst.setString(4,s5.trim());
               pst.setInt(5, 0);
               System.out.println(pst);
                boolean check  = pst.execute();
-              
-              if(!check) 
+              */
+              int check  = 1;
+              if(check==1) 
               {JOptionPane.showMessageDialog( null, "You have successfully created your user account");
               
               close();
@@ -295,7 +297,7 @@ private boolean validate_username(String username) {
               nextframe.setVisible(true); 
                   //System.out.println("I am reaching");
               }
-              if(check) JOptionPane.showMessageDialog( null, "User cannot be added at this point of time ");
+              if(check==0) JOptionPane.showMessageDialog( null, "User cannot be added at this point of time ");
               
         } 
         catch (SQLException sqlException)
@@ -333,9 +335,7 @@ private boolean validate_username(String username) {
             else {
                 JOptionPane.showMessageDialog(null,"Some Error Occured");
             }
-        }
-        catch (ClassNotFoundException | InstantiationException | IllegalAccessException   e) { 
-}       
+        }       
        }
            catch(HeadlessException e) { }
        }
