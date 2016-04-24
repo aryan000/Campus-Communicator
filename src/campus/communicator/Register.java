@@ -184,7 +184,7 @@ Connection conn = null;
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
 private boolean validate_username(String username) {
-   try{           
+  /* try{           
        Class.forName("com.mysql.jdbc.Driver");  // MySQL database connection
        String url = "jdbc:mysql://localhost:3306/"; 
         String dbName = "javachat";
@@ -206,11 +206,12 @@ private boolean validate_username(String username) {
        if(rs.next())            
            return true;    
        else
+    */
            return false;            
-   }
-   catch(ClassNotFoundException | SQLException e){
+   //}
+   /*catch(ClassNotFoundException | SQLException e){
        return false;
-   }       
+   } */      
 }
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -266,7 +267,7 @@ private boolean validate_username(String username) {
                 statement = conn.createStatement();
             */
               String sqlnew = "Create Database javachat";
-              statement.executeUpdate(sqlnew);
+             // statement.executeUpdate(sqlnew);
               String tablenew = "create table chatdb\n" +
                 "( \n" +
                 "userid int primary key,\n" +
