@@ -176,7 +176,7 @@ public class MainUI extends javax.swing.JFrame {
    
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here: 
-        close();
+      //  close();
            TextChat nextframe = new TextChat(); 
            TextChat.jLabel7.setText(jLabel3.getText());
            TextChat.jLabel8.setText(jLabel4.getText());
@@ -187,7 +187,7 @@ public class MainUI extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        close();
+        //close();
         FileTransfer nextframe = new FileTransfer();
         nextframe.setVisible(true);
         
